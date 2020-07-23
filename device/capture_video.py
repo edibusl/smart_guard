@@ -1,3 +1,4 @@
+from typing import Optional
 from datetime import datetime as dt
 import time
 import sys
@@ -13,7 +14,7 @@ this.video_output = None
 this.should_save_video = False
 
 
-def init(display: bool, fps: int, input: str) -> None:
+def init(display: bool, fps: int, input: Optional[str]) -> None:
     this.conf['display'] = display
     this.conf['fps'] = fps
     this.conf['input'] = input

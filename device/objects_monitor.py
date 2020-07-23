@@ -11,7 +11,7 @@ from device.common import FrameObject, MonitoredFrame
 from device import frames_sender
 
 
-SEND_BAD_FRAMES_WITH_MOTION_AFTER_SEC = 10
+SEND_BAD_FRAMES_WITH_MOTION_AFTER_SEC = 60
 SKIP_CHECKS_AFTER_UPLOAD_MIN = 7
 CHECK_ACTIVITY_PERIOD_SEC = 5
 
