@@ -9,7 +9,7 @@ from numpy import ndarray
 
 from device.common import FrameObject, MonitoredFrame
 from device import frames_sender
-
+from device.mqtt import Mqtt
 
 SEND_BAD_FRAMES_WITH_MOTION_AFTER_SEC = 60
 SKIP_CHECKS_AFTER_UPLOAD_MIN = 7
@@ -28,6 +28,8 @@ def init(fps: int) -> None:
     this.fps = fps
     this.circular_buffer = deque(maxlen=max(fps * 60 * 2, 1200))
     this.last_activity_check = dt.now()
+    this.best_frames = []
+    Mqtt().register_callback(_handle_message_from_backend)
 
 
 def add_frame(frame: ndarray, objects: List[FrameObject], faces: List[FrameObject]) -> None:
@@ -84,7 +86,7 @@ def send_frames(frames: List[MonitoredFrame]):
     best_frame = choose_best_frame(frames)
     print(f"Best frame score: {best_frame.score}, objects: {len(best_frame.objects)}, faces: {len(best_frame.faces)}")
 
-    frames_sender.send_motion_frames([best_frame])
+    report_detection([best_frame])
 
     this.last_motion_detection = None
     this.last_frame_sent = dt.now()
@@ -125,3 +127,22 @@ def has_good_frames(frames: List[MonitoredFrame]) -> bool:
 
 def choose_best_frame(frames: List[MonitoredFrame]) -> MonitoredFrame:
     return max(frames, key=lambda f: f.score)
+
+
+def report_detection(frames: List[MonitoredFrame]) -> None:
+    this.best_frames = frames
+
+    # TODO - Implement automatic serialization
+    # TODO - raspberrypi_edi - client id should be loaded from config
+    Mqtt().send("report/detection", {
+        "client_id": "raspberrypi_edi",
+        "frames": [{
+            'num_faces_detected': len(fr.faces),
+            'num_objects_detected': len(fr.objects)
+        } for fr in frames]
+    })
+
+
+def _handle_message_from_backend(topic: str, msg: dict):
+    frames_sender.send_motion_frames(this.best_frames, msg['upload_url'])
+    this.best_frames = []

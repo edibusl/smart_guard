@@ -8,16 +8,13 @@ from device.common import MonitoredFrame
 from device import video_processing
 
 
-def send_motion_frames(frames: List[MonitoredFrame]) -> None:
+def send_motion_frames(frames: List[MonitoredFrame], upload_url_data: dict) -> None:
     # TODO - Send concurrently
-
     """
     Send only the face in the frame (extract a larger area around the head)
     If no face, send only metadata
     """
     for monitored_frame in frames:
-        upload_url_data = get_upload_url_data()
-
         # Upload head only if possible
         blurred_frame = video_processing.blur(monitored_frame.frame, monitored_frame.faces)
 

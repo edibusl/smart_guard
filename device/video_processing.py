@@ -44,7 +44,7 @@ def detect_motion(prev_frame: ndarray, cur_frame: ndarray, draw: bool = False) -
 
 
 def detect_faces(frame: ndarray, detected_objects: List[FrameObject], draw: bool = False) -> List[FrameObject]:
-    face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+    face_cascade = cv2.CascadeClassifier('device/haarcascade_frontalface_default.xml')
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     faces = face_cascade.detectMultiScale(gray, 1.1, 4)
 
