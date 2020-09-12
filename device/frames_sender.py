@@ -16,10 +16,10 @@ def send_motion_frames(frames: List[MonitoredFrame], upload_url_data: dict) -> N
     """
     for monitored_frame in frames:
         # Upload head only if possible
-        blurred_frame = video_processing.blur(monitored_frame.frame, monitored_frame.faces)
+        # blurred_frame = video_processing.blur(monitored_frame.frame, monitored_frame.faces)
 
         # Compress frame to jpg and convert ndarray to a stream
-        encoded_image_bytes = cv2.imencode('.jpg', blurred_frame)[1]
+        encoded_image_bytes = cv2.imencode('.jpg', monitored_frame.frame)[1]
         stream = io.BytesIO(encoded_image_bytes)
 
         upload_file_s3(upload_url_data, stream)
