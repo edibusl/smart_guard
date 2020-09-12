@@ -1,4 +1,5 @@
 import logging
+import os
 from device import capture_video
 from device import mqtt
 
@@ -11,7 +12,7 @@ def init_logger():
 
 
 def start_capture():
-    capture_video.init(True, 10, None)
+    capture_video.init(os.environ.get('DISPLAY_VIDEO') == '1', 10, None)
     # capture_video.init(True, 600, "test1.mp4")
     capture_video.capture()
 
