@@ -107,6 +107,12 @@ def blur(frame: ndarray, faces: List[FrameObject]) -> ndarray:
     return frame_blurred
 
 
+def draw_objects_in_frame(frame: ndarray, frame_objects: List[FrameObject], color: tuple = (0, 255, 0)):
+    for frame_object in frame_objects:
+        x, y, w, h = frame_object.x, frame_object.y, frame_object.w, frame_object.h
+        cv2.rectangle(frame, (x, y), (x + w, y + h), color, 2)
+
+
 def detect_door_opening():
     # Future
     pass

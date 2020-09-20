@@ -64,6 +64,7 @@ class Mqtt(metaclass=Singleton):
         # Subscribe to topics
         self.logger.info(f"Subscribing to topic {self.topic}")
         self.myAWSIoTMQTTClient.subscribe(self.topic, 1, self._callback)
+        self.logger.info("Finished subscribing")
 
     def register_callback(self, callback: OnMessageCallback):
         self.callbacks.append(callback)
