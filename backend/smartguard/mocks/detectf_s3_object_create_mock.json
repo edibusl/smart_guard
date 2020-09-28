@@ -1,0 +1,38 @@
+{
+  "Records": [
+    {
+      "eventVersion": "2.1",
+      "eventSource": "aws:s3",
+      "awsRegion": "us-east-1",
+      "eventTime": "2020-09-28T17:35:14.085Z",
+      "eventName": "ObjectCreated:Put",
+      "userIdentity": {
+        "principalId": "A39ZR4H6ELJ3AB"
+      },
+      "requestParameters": {
+        "sourceIPAddress": "176.230.214.191"
+      },
+      "responseElements": {
+        "x-amz-request-id": "A5C2F2BBDE2CF81A",
+        "x-amz-id-2": "i+h9rlDpUiF3Mji51HQfzi4Y0jMYKHcgIsR0/zyO3yKWzmB7zH8TDFlKgcFJZmoPUbrQgEJeFxSrtiLsxdILbpxU4wMZ4nuz"
+      },
+      "s3": {
+        "s3SchemaVersion": "1.0",
+        "configurationId": "smartguard-dev-detectf-68a737133cefb25bff959852b8f04754",
+        "bucket": {
+          "name": "smart-guard-files",
+          "ownerIdentity": {
+            "principalId": "A39ZR4H6ELJ3AB"
+          },
+          "arn": "arn:aws:s3:::smart-guard-files"
+        },
+        "object": {
+          "key": "2020/09/28_09_14_26_283950__test1.jpg",
+          "size": 58187,
+          "eTag": "3006298c51886dc26fd7bff02c0c6721",
+          "sequencer": "005F721ED8E7AD217B"
+        }
+      }
+    }
+  ]
+}
