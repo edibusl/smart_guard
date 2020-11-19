@@ -66,6 +66,7 @@ package:
 functions:
   detectf:
     handler: detect_faces.handler
+    timeout: 30
     events:
       - s3:
           bucket: smart-guard-files
@@ -132,3 +133,5 @@ custom:
     dockerizePip: non-linux
     zip: true
     fileName: requirements_detectf.txt
+    useStaticCache: true
+    useDownloadCache: true
