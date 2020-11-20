@@ -30,25 +30,16 @@ provider:
       Resource:
         - { "Fn::Join": ["", ["arn:aws:s3:::", { "Ref": "ServerlessDeploymentBucket" } ]]}
         - "arn:aws:s3:::smart-guard-files/*"
+    - Effect: Allow
+      Action:
+        - dynamodb:GetItem
+        - dynamodb:UpdateItem
+        - dynamodb:PutItem
+      Resource:
+        - "arn:aws:dynamodb:us-east-1:312452674585:table/detections"
 # you can overwrite defaults here
 #  stage: dev
 #  region: us-east-1
-
-# you can add statements to the Lambda function's IAM Role here
-#  iamRoleStatements:
-#    - Effect: "Allow"
-#      Action:
-#        - "s3:ListBucket"
-#      Resource: { "Fn::Join" : ["", ["arn:aws:s3:::", { "Ref" : "ServerlessDeploymentBucket" } ] ]  }
-#    - Effect: "Allow"
-#      Action:
-#        - "s3:PutObject"
-#      Resource:
-#        Fn::Join:
-#          - ""
-#          - - "arn:aws:s3:::"
-#            - "Ref" : "ServerlessDeploymentBucket"
-#            - "/*"
 
 # you can define service wide environment variables here
 #  environment:
@@ -66,7 +57,7 @@ package:
 functions:
   detectf:
     handler: detect_faces.handler
-    timeout: 30
+    timeout: 60
     events:
       - s3:
           bucket: smart-guard-files

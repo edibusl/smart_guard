@@ -27,7 +27,7 @@
           "arn": "arn:aws:s3:::smart-guard-files"
         },
         "object": {
-          "key": "2020/09/28_09_14_26_283950__test1.jpg",
+          "key": "2020/11/08_11_32_50_853285.jpg",
           "size": 58187,
           "eTag": "3006298c51886dc26fd7bff02c0c6721",
           "sequencer": "005F721ED8E7AD217B"
